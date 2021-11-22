@@ -1,13 +1,12 @@
 package janemiro;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+
 
 public class DemoQaFormTest {
 
@@ -16,23 +15,28 @@ public class DemoQaFormTest {
         Configuration.browserSize = "1920x1080";
     }
 
-    String name = "Jee";
-    String lastName = "Doe";
-    String email = "jee.doe@gmail.com";
-    String gender = "Other";
-    String mobile = "1234567890";
-    String month = "May";
-    String subject1 = "Commerce";
-    String subject2 = "Arts";
-    String hobby = "Music";
-    String address;
-    String state;
-    String city;
+    String url = "https://demoqa.com/automation-practice-form",
+            name = "Jee",
+            lastName = "Doe",
+            email = "jee.doe@gmail.com",
+            gender = "Other",
+            mobile = "1234567890",
+            month = "May",
+            year = "1990",
+            subject1 = "Commerce",
+            subject2 = "Arts",
+            hobby = "Music",
+            picture = "img/1.jpg",
+            address = "Roof, 5",
+            state = "Rajasthan",
+            city = "Jaipur";
 
 
     @Test
     void fillFormTest() {
-        open("https://demoqa.com/automation-practice-form");
+
+        // Open URL
+        open(url);
         $("#firstName").setValue(name);
         $("#lastName").setValue(lastName);
         $("#userEmail").setValue(email);
@@ -41,27 +45,35 @@ public class DemoQaFormTest {
         //date of birth
 
         $("#dateOfBirthInput").click();
+        $(".react-datepicker__month-select").click();
+        $(".react-datepicker__month-select").selectOption(month);
+        $(".react-datepicker__year-select").selectOption(year);
+        $(".react-datepicker__day--030:not(.react-datepicker__day--outside-month)").click();
 
-
-        sleep(3000);
-
-
+        $("#subjectsInput").click();
         $("#subjectsInput").setValue(subject1).pressEnter();
         $("#subjectsInput").setValue(subject2).pressEnter();
         $("#hobbiesWrapper").findElement(byText(hobby)).click();
 
 
         //picture
+        $("#uploadPicture").uploadFromClasspath(picture);
+
+
         $("#currentAddress").setValue(address);
+
         $("#state").click();
-        //  $(Rajasthan)
-        //select city
-        $("#submit").click();
+        $("#stateCity-wrapper").selectOption(state);
+
+        $("#city").click();
+       $("#stateCity-wrapper").$(byText(city)).scrollTo().click();
+
+       $("#submit").click();
 
 
 // check
-        $("#modal-content name").shouldHave(text(name), text(lastName), text(email), text(gender), text(mobile),
-                text(subject1), text(subject2), text(hobby), text(address), text(state), text(city));
+        //$("#modal-content name").shouldHave(text(name), text(lastName), text(email), text(gender), text(mobile),
+        //         text(subject1), text(subject2), text(hobby), text(address), text(state), text(city));
         sleep(6000);
     }
 
