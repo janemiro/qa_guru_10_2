@@ -5,6 +5,7 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -78,10 +79,10 @@ public class DemoQaFormTest {
         $("#submit").click();
 
         // Check the final form
-        $(".modal-open").shouldHave(Condition.text(name), Condition.text(lastName), Condition.text(email), Condition.text(gender), Condition.text(mobile),
-                Condition.text(month), Condition.text(year), Condition.text(day),
-                Condition.text(subject1), Condition.text(subject2), Condition.text(hobby),
-                Condition.text(picture), Condition.text(address), Condition.text(state), Condition.text(city));
+        $(".modal-open").shouldHave(text(name), text(lastName), text(email), text(gender), text(mobile),
+                text(month), text(year), text(day),
+                text(subject1), text(subject2), text(hobby),
+                text(picture), text(address), text(state), text(city));
 
     }
 
