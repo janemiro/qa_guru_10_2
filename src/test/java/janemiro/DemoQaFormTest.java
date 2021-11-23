@@ -83,7 +83,5 @@ public class DemoQaFormTest {
                 text(month), text(year), text(day),
                 text(subject1), text(subject2), text(hobby),
                 text(picture), text(address), text(state), text(city));
-
     }
-
 }
