@@ -1,2 +1,2 @@
-# qa_guru_9_2
+# qa_guru_10_2
 Автотест на проверку формы https://demoqa.com/automation-practice-form
